@@ -1,10 +1,11 @@
 package racingcar;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class RacingManager {
-    private ArrayList<RacingCar> racingCars;
+    private List<RacingCar> racingCars;
     private Integer totalRounds;
     private Integer currentRound;
     private final Integer RANDOM_VALUE_LOWER_BOUND = 4;
@@ -15,7 +16,7 @@ public class RacingManager {
         this.currentRound = 0;
     }
 
-    public void updateRacingCars(ArrayList<String> carNames) {
+    public void updateRacingCars(List<String> carNames) {
         racingCars.clear();
         for (String name : carNames) {
             RacingCar racingCar = new RacingCar(name);
@@ -29,7 +30,7 @@ public class RacingManager {
 
     public void playGame() {
         System.out.println("실행 결과");
-        while (currentRound <= totalRounds) {
+        while (currentRound < totalRounds) {
             playRound();
             currentRound += 1;
         }
@@ -54,7 +55,24 @@ public class RacingManager {
         System.out.println();
     }
 
-    public void printWinners() {
+    public List<RacingCar> getWinners() {
+        racingCars.sort((r1, r2) -> r2.getPosition() - r1.getPosition());
+        int maxPosition = racingCars.getFirst().getPosition();
 
+        return racingCars.stream()
+                .filter(car -> car.getPosition() == maxPosition)
+                .collect(Collectors.toList());
     }
+
+    public void printWinners() {
+        List<RacingCar> winners = getWinners();
+        String message = "최종 우승자 : ";
+
+        for (RacingCar winner : winners) {
+            message = message.concat(winner.getName() + ", ");
+        }
+
+        System.out.println(message.substring(0, message.length() - 2));
+    }
+
 }
