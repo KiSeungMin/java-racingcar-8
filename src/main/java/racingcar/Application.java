@@ -8,7 +8,11 @@ public class Application {
         ArrayList<String> names = inputParser.getInputNames();
         Integer round = inputParser.getRound();
 
-        System.out.println("names: " + names);
-        System.out.println("round: " + round);
+        RacingManager racingManager = new RacingManager();
+        racingManager.updateRacingCars(names);
+        racingManager.updateTotalRounds(round);
+
+        racingManager.playGame();
+        racingManager.printWinners();
     }
 }
