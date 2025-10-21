@@ -23,10 +23,6 @@ public class RacingCar {
         return this.name;
     }
 
-    public void addPosition() {
-        this.position += 1;
-    }
-
     public void addPosition(Integer amount) {
         this.position += amount;
     }

@@ -25,17 +25,11 @@ public class InputParser {
         System.out.println("시도할 횟수는 몇 회인가요?");
         try {
             Integer round = Integer.parseInt(readLine());
-            checkRoundIsValid(round);
+            validateRound(round);
 
             return round;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ROUND_EXCEPTION_MESSAGE);
-        }
-    }
-
-    public void validateName(String name) {
-        if (name.length() > 5) {
-            throw new IllegalArgumentException(NAME_EXCEPTION_MESSAGE);
         }
     }
 
@@ -49,7 +43,13 @@ public class InputParser {
         }
     }
 
-    public void checkRoundIsValid(Integer round) {
+    public void validateName(String name) {
+        if (name.length() > 5 || name.isEmpty()) {
+            throw new IllegalArgumentException(NAME_EXCEPTION_MESSAGE);
+        }
+    }
+
+    public void validateRound(Integer round) {
         if (round > ROUND_LIMIT || round < 0) {
             throw new IllegalArgumentException(ROUND_EXCEPTION_MESSAGE);
         }
