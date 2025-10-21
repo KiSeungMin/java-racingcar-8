@@ -2,7 +2,6 @@ package racingcar;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class InputParser {
@@ -12,14 +11,12 @@ public class InputParser {
     private final String ROUND_EXCEPTION_MESSAGE = "라운드의 횟수는 0 ~ " + ROUND_LIMIT + " 사이의 정수이어야 합니다.";
 
 
-    public ArrayList<String> getInputNames() {
+    public List<String> getInputNames() {
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
         String inputNames = readLine();
 
-        ArrayList<String> names = new ArrayList<>(List.of(inputNames.split(",")));
-        for (String name : names) {
-            checkNameIsValid(name);
-        }
+        List<String> names = List.of(inputNames.split(","));
+        validateNames(names);
 
         return names;
     }
@@ -36,9 +33,19 @@ public class InputParser {
         }
     }
 
-    public void checkNameIsValid(String name) {
+    public void validateName(String name) {
         if (name.length() > 5) {
             throw new IllegalArgumentException(NAME_EXCEPTION_MESSAGE);
+        }
+    }
+
+    public void validateNames(List<String> names) {
+        if (names.isEmpty()) {
+            throw new IllegalArgumentException(NAME_EXCEPTION_MESSAGE);
+        }
+
+        for (String name : names) {
+            validateName(name);
         }
     }
 

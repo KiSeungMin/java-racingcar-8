@@ -1,11 +1,11 @@
 package racingcar;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
         InputParser inputParser = new InputParser();
-        ArrayList<String> names = inputParser.getInputNames();
+        List<String> names = inputParser.getInputNames();
         Integer round = inputParser.getRound();
 
         RacingManager racingManager = new RacingManager();
