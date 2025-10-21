@@ -19,6 +19,10 @@ public class RacingCar {
         this.position = position;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public void addPosition() {
         this.position += 1;
     }
