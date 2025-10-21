@@ -44,7 +44,7 @@ public class RacingCar {
     }
 
     public void moveIfRandomValueMoreThan(Integer lowerBound) {
-        if (randomValue > lowerBound) {
+        if (randomValue >= lowerBound) {
             this.addPosition(1);
         }
     }
